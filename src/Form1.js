@@ -3469,7 +3469,6 @@ async validateYear() {
                       id = "M/s"
                       name = "NameTitleThree[9][]"
                       onClick={(e)=>this.handleCheckbox(e,"NameTitleThree")}/>      
-                   <input type="checkbox" className="Check" />
                    <label className="Label_with_no_space"> M/s</label> <br />
                     
                    <table>

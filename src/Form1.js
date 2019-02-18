@@ -247,6 +247,28 @@ class Form1 extends Component {
       let val = this.state.errors.RAMiddleName;
       this.setState({val});
    }
+   else if(this.state.data.RAFlat === " " || this.state.data.RAPremises === " " ||
+   this.state.data.RARoad === " " || this.state.data.RATown === " " ||
+   this.state.data.RAArea === " " || this.state.data.RAState === " " ||
+   this.state.data.RAPincode === " ")
+   {
+      this.state.errors.RAState = "*Fields are required";
+      let val = this.state.errors.RAState;
+      this.setState({val});
+   }
+   else if(this.state.data.POI === " " || this.state.data.POA === " " ||
+   this.state.data.POB === " ")
+   {
+      this.state.errors.POB = "*Fields are required"
+      let val = this.state.errors.POB;
+      this.setState({val});
+   }
+   else if(this.state.data.Applicant === " " || this.state.data.Capacity === " ")
+   {
+      this.state.errors.Capacity = "*Fields are required";
+      let val = this.state.errors.Capacity;
+      this.setState({val});
+   }
    else
    {
      this.setState({ open: true });

@@ -82,6 +82,40 @@
   /* margin-top: 20px; */
 }
 
+.nav {
+  background: #232733;
+  height: 45px;
+}
+.navbar {
+  /* display: flex;
+flex-wrap: wrap; */
+}
+
+.navtitle {
+ font-size: 25px;
+ color: #ffffff;
+ margin-left:  35%;
+}
+
+/* .navbutton {
+  margin-left: 90px;
+} */
+
+.button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 10px;
+
+  text-decoration: none;
+  /* display: inline-block; */
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  margin-left: 30%;
+}
+.button3 {border-radius: 8px;}
+
 /* Modal */
 
 .modalhead {

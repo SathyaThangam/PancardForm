@@ -1,7 +1,7 @@
 module.exports = {
   apps : [{
     name: 'pancard',
-    script: 'app.js',
+    script: 'npm',
 
     // Options reference: https://pm2.io/doc/en/runtime/reference/ecosystem-file/
     args: 'one two',
@@ -20,7 +20,7 @@ module.exports = {
   deploy : {
     production : {
       user : 'root',
-      host : '159.89.165.174/',
+      host : '159.89.165.174',
       ref  : 'origin/master',
       repo : 'https://github.com/SathyaThangam/pancard.git',
       path : '/var/www/pancard',

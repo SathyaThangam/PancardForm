@@ -193,15 +193,59 @@ class Form1 extends Component {
    if(this.state.data.LastName === " " || this.state.data.FirstName === " ")
    {
       this.state.errors.MiddleName = "*Fields are required";
+      let val = this.state.errors.MiddleName;
+      this.setState({val});
    }
    else if(this.state.data.Day === " " || this.state.data.Month === " " || this.state.data.Year === " " )
    {
       this.state.errors.Year = "*Fields are required";
+      let val = this.state.errors.Year;
+      this.setState({val});
    }
    else if(this.state.data.FatherLastName === " " || this.state.data.FatherFirstName === " ")
    {
        this.state.errors.FatherMiddleName = "*Fields are required";
-       console.log("error in father field")
+       let val = this.state.errors.FatherMiddleName;
+       this.setState({val});
+   }
+   else if (this.state.data.ResidenceFlat === " " || this.state.data.ResidencePremises === " " ||
+   this.state.data.ResidenceRoad === " " || this.state.data.ResidenceArea === " " || 
+   this.state.data.ResidenceTown === " " || this.state.data.ResidenceState === " " ||
+   this.state.data.ResidencePincode === " " || this.state.data.ResidenceCountry === " ")
+   {
+      this.state.errors.ResidenceState = "*Fields are required";
+      let val = this.state.errors.ResidenceState;
+      this.setState ({val});
+   }
+   else if(this.state.data.OfficeName === " " || this.state.data.OfficeFlat === " " || 
+   this.state.data.OfficePremises === " " || this.state.data.OfficeRoad === " " || 
+   this.state.data.OfficeArea === " " || this.state.data.OfficeTown === " " ||
+   this.state.data.OfficeState === " " || this.state.data.OfficePincode === " " || 
+   this.state.data.OfficeCountry === " ")
+   {
+      this.state.errors.OfficeState = "*Fields are required";
+      let val = this.state.errors.OfficeState;
+      this.setState({val});
+   }
+   else if(this.state.data.CountryCode === " " || this.state.data.StdCode === " " ||
+   this.state.data.PhoneNumber === " " || this.state.data.Email === " ")
+   {
+      this.state.errors.Email = "*Fields are required";
+      let val = this.state.errors.Email;
+      this.setState({val});
+   }
+   else if((this.state.data.AadhaarNumber === " " && this.state.data.EnrolmentId === " ") || 
+   this.state.data.AadhaarFirstName === " " || this.state.data.AadhaarLastName === " ")
+   {
+      this.state.errors.AadhaarMiddleName = "*Fields are required";
+      let val = this.state.errors.AadhaarMiddleName;
+      this.setState ({val});
+   }
+   else if(this.state.data.RALastName === " " || this.state.data.RAFirstName === " ")
+   {
+      this.state.errors.RAMiddleName = "*Fields are required";
+      let val = this.state.errors.RAMiddleName;
+      this.setState({val});
    }
    else
    {
@@ -1273,8 +1317,8 @@ async validateEnrolmentId() {
        this.state.isModalEnabled =  false;
    }
    else if (typeof  this.state.data.EnrolmentId !== "undefined") {
-       if (!this.state.data.EnrolmentId.match(/^[a-zA-Z ]*$/)) {
-           this.state.errors.EnrolmentId = "*Please enter alphabet characters only.";
+       if (!this.state.data.EnrolmentId.match(/^[a-zA-Z0-9 ]*$/)) {
+           this.state.errors.EnrolmentId = "*Please enter alphanumeric characters only.";
            this.state.isModalEnabled =  false;
        }
    }
@@ -1295,8 +1339,8 @@ async validateRegistrationNumber() {
    this.setState ({temp})
  
    if (typeof  this.state.data.RegistrationNumber !== "undefined") {
-       if (!this.state.data.RegistrationNumber.match(/^[a-zA-Z ]*$/)) {
-           this.state.errors.RegistrationNumber = "*Please enter alphabet characters only.";
+       if (!this.state.data.RegistrationNumber.match(/^[0-9 ]*$/)) {
+           this.state.errors.RegistrationNumber = "*Please enter numeric characters only.";
            this.state.isModalEnabled =  false;
        }
    }
@@ -2241,9 +2285,12 @@ async validateYear() {
     return (
 
        <div>
+       <div className="nav">
        <div className="navbar">
-           <button onClick={this.onOpenModal}  disabled={!this.state.isModalEnabled}>Download Pdf</button>
-           <Modal   open={open} onClose={this.onCloseModal} center>
+       <label className="navtitle">Panform</label>
+       <button class="button button3 navbutton"  onClick={this.onOpenModal}>Download </button>
+        </div>
+        <Modal   open={open} onClose={this.onCloseModal} center>
             <br />
             <div className="modalhead container">
             <label>Enter your mobile number:</label><br />
@@ -2257,7 +2304,7 @@ async validateYear() {
             </div>
             <br />
             <button onClick={this.sendno}>Send OTP</button><br /><br />
-            {this.state.check == 1 ?  
+            {this.state.check === 1 ?  
               <div>
               <div className="otpnumber">
               <OtpInput
@@ -2269,7 +2316,7 @@ async validateYear() {
               </div>
               <br />
               <button onClick={this.sendmsg}>Verify OTP</button><br /><br />
-              {this.state.secoundcheck ==1 ?
+              {this.state.secoundcheck === 1 ?
               <div>
                <button onClick={this.savepdf}>Save & Download</button> &nbsp; &nbsp; &nbsp; OR &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                <button onClick={this.getdata}>Get data</button>

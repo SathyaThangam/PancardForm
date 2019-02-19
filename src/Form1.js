@@ -33,63 +33,19 @@ class Form1 extends Component {
          Status : " ",
          Income : " ",
          NameTitleThree : " ",
-         FirstName: " ",
-         LastName : " ",
          MiddleName : " ",
-         FatherFirstName : " ",
          FatherMiddleName: " ",
-         FatherLastName: " ",
-         MotherFirstName: " ",
          MotherMiddleName: " ",
-         MotherLastName: " ",
-         OtherFirstName: " ",
-         OtherLastName: " ",
          OtherMiddleName: " ",
-         RAFirstName: " ",
-         RALastName: " ",
          RAMiddleName: " ",
-         AbbreviationOne: " ",
          AbbreviationTwo: " ",
-         ResidenceFlat: " ",
-         ResidencePremises: " ",
-         ResidenceRoad: " ",
-         ResidenceArea: " ",
-         ResidenceTown: " ",
-         OfficeName: " ",
-         OfficeFlat: " ",
-         OfficePremises: " ",
-         OfficeRoad: " ",
-         OfficeArea: " ",
-         OfficeTown: " ",
-         RAFlat: " ",
-         RAPremises: " ",
-         RARoad: " ",
-         RAArea: " ",
-         RATown: " ",
-         AadhaarFirstName: " ",
-         AadhaarLastName: " ",
          AadhaarMiddleName: " ",
-         AadhaarNumber: " ",
-         EnrolmentId : " ",
          RegistrationNumber: " ",
          ResidenceState: " ",
-         ResidencePincode: " ",
-         ResidenceCountry: " ",
          OfficeState: " ",
-         OfficePincode: " ",
-         OfficeCountry: " ",
          RAState: " ",
-         RAPincode: " ",
-         CountryCode: " ",
-         StdCode: " ",
-         PhoneNumber: " ",
          Day: " ",
-         Month: " ",
-         Year: " ",
-         POI: " ",
-         POA: " ",
          POB: " ",
-         Applicant: " ",
          Capacity: " ",
          Email: " ",
          BusinessCode: " ",
@@ -188,31 +144,70 @@ class Form1 extends Component {
 
  onOpenModal = () => {
 
-   if(this.state.data.LastName === " " || this.state.data.FirstName === " ")
+   if(this.state.data.NameTitleOne === " ")
+   {
+      this.state.errors.MiddleName = "*Please select title as applicable";
+      let temp = this.state.errors.MiddleName;
+      this.setState ({temp})
+   }
+   else if(this.state.data.LastName === " " || this.state.data.FirstName === " ")
    { 
-      let val = this.state.errors.MiddleName;
-      val = "*Fields are required";
-      this.setState({val});
+      this.state.errors.MiddleName = "*Fields are required";
+      let temp = this.state.errors.MiddleName;
+      this.setState ({temp})
+      
+   }
+   else if(this.state.data.OtherName === " ")
+   {
+      this.state.errors.OtherMiddleName = "*Please tick as applicable";
+      let temp = this.state.errors.OtherMiddleName;
+      this.setState ({temp})
+   }
+   else if(this.state.data.NameTitleTwo === " " && this.state.data.OtherName === "Yes")
+   {
+      this.state.errors.OtherMiddleName = "*Please select title as applicable";
+      let temp = this.state.errors.OtherMiddleName;
+      this.setState ({temp})
+   }
+   else if(this.state.data.OtherName === "Yes" && (this.state.data.OtherFirstName === " " ||
+   this.state.data.OtherLastName === " "))
+   {
+      this.state.errors.OtherMiddleName = "*Fields are required";
+      let temp = this.state.errors.OtherMiddleName;
+      this.setState ({temp})
+   }
+   else if(this.state.data.Gender === " ")
+   {
+      this.state.errors.Gender = "*Please tick as applicable";
+      let temp = this.state.errors.Gender;
+      this.setState ({temp})
    }
    else if(this.state.data.Day === " " || this.state.data.Month === " " || this.state.data.Year === " " )
    {
-      let val = this.state.errors.Year;
-      val = "*Fields are required";
+      this.state.errors.Day = "*Fields are required";
+      let val = this.state.errors.Day;
       this.setState({val});
    }
    else if(this.state.data.FatherLastName === " " || this.state.data.FatherFirstName === " ")
    {
+       this.state.errors.FatherMiddleName = "*Fields are required";
        let val = this.state.errors.FatherMiddleName;
-       val = "*Fields are required";
        this.setState({val});
+   }
+   else if(this.state.data.ParentName === "Mother's name" && (this.state.data.MotherFirstName === " "
+   || this.state.data.MotherLastName === " "))
+   {
+       this.state.errors.MotherMiddleName = "*Please enter Mother's name";
+       let val = this.state.errors.MotherMiddleName;
+       this.setState({val})
    }
    else if (this.state.data.ResidenceFlat === " " || this.state.data.ResidencePremises === " " ||
    this.state.data.ResidenceRoad === " " || this.state.data.ResidenceArea === " " || 
    this.state.data.ResidenceTown === " " || this.state.data.ResidenceState === " " ||
    this.state.data.ResidencePincode === " " || this.state.data.ResidenceCountry === " ")
    {
+      this.state.errors.ResidenceState = "*Fields are required";
       let val = this.state.errors.ResidenceState;
-      val = "*Fields are required";
       this.setState ({val});
    }
    else if(this.state.data.OfficeName === " " || this.state.data.OfficeFlat === " " || 
@@ -221,28 +216,45 @@ class Form1 extends Component {
    this.state.data.OfficeState === " " || this.state.data.OfficePincode === " " || 
    this.state.data.OfficeCountry === " ")
    {
+      this.state.errors.OfficeState = "*Fields are required";
       let val = this.state.errors.OfficeState;
-      val = "*Fields are required";
       this.setState({val});
+   }
+   else if(this.state.data.Communication === " ")
+   {
+      this.state.errors.Communication = "*Please tick as applicable";
+      let val = this.state.errors.Communication;
+      this.setState({val})
    }
    else if(this.state.data.CountryCode === " " || this.state.data.StdCode === " " ||
    this.state.data.PhoneNumber === " " || this.state.data.Email === " ")
    {
+      this.state.errors.Email = "*Fields are required";
       let val = this.state.errors.Email;
-      val = "*Fields are required";
       this.setState({val});
    }
-   else if((this.state.data.AadhaarNumber === " " && this.state.data.EnrolmentId === " ") || 
-   this.state.data.AadhaarFirstName === " " || this.state.data.AadhaarLastName === " ")
+   else if(this.state.data.Status === " ")
    {
+      this.state.errors.Status = "*Please select status as applicable";
+      let val = this.state.errors.Status;
+      this.setState({val});
+   }
+   else if(this.state.data.AadhaarNumber === " " && this.state.data.EnrolmentId === " ")
+   {
+      this.state.errors.AadhaarMiddleName = "*Either Aadhaar number or Enrolment Id is required";
       let val = this.state.errors.AadhaarMiddleName;
-      val = "*Fields are required";
+      this.setState({val})
+   }
+   else if(this.state.data.AadhaarFirstName === " " || this.state.data.AadhaarLastName === " ")
+   {
+      this.state.errors.AadhaarMiddleName = "*Fields are required";
+      let val = this.state.errors.AadhaarMiddleName;
       this.setState ({val});
    }
    else if(this.state.data.RALastName === " " || this.state.data.RAFirstName === " ")
    {
+      this.state.errors.RAMiddleName = "*Fields are required";
       let val = this.state.errors.RAMiddleName;
-      val = "*Fields are required";
       this.setState({val});
    }
    else if(this.state.data.RAFlat === " " || this.state.data.RAPremises === " " ||
@@ -250,21 +262,21 @@ class Form1 extends Component {
    this.state.data.RAArea === " " || this.state.data.RAState === " " ||
    this.state.data.RAPincode === " ")
    {
+      this.state.errors.RAState = "*Fields are required";
       let val = this.state.errors.RAState;
-      val = "*Fields are required";
       this.setState({val});
    }
    else if(this.state.data.POI === " " || this.state.data.POA === " " ||
    this.state.data.POB === " ")
    {
+      this.state.errors.POB = "*Fields are required"
       let val = this.state.errors.POB;
-      val = "*Fields are required"
       this.setState({val});
    }
    else if(this.state.data.Applicant === " " || this.state.data.Capacity === " ")
    {
+      this.state.data.Capacity = "*Fields are required";
       let val = this.state.errors.Capacity;
-      val = "*Fields are required";
       this.setState({val});
    }
    else
@@ -2564,14 +2576,14 @@ async validateYear() {
                               onChange={otp => this.handleInput(otp, "LastName" , "1")}
                               numInputs={25}
                             />
-                            <span className="ErrorMsg">{this.state.errors.LastName}</span>
+                            
                             <OtpInput
                               name="FirstName"
                               value={this.state.data.FirstName}
                               onChange={otp => this.handleInput(otp, "FirstName" , "1")}
                               numInputs={25}
                             />
-                            <span className="ErrorMsg">{this.state.errors.FirstName}</span>
+                            
                             <OtpInput
                               name="MiddleName"
                               value={this.state.data.MiddleName}
@@ -2600,7 +2612,7 @@ async validateYear() {
                          onChange={otp => this.handleInput(otp, "AbbreviationOne" , "1")}
                          numInputs={37}
                       />
-                      <span className="ErrorMsg">{this.state.errors.AbbreviationOne}</span>
+                      
                       <OtpInput
                          name="AbbreviationTwo"
                          value={this.state.data.AbbreviationTwo}
@@ -2694,7 +2706,7 @@ async validateYear() {
                               onChange={otp => this.handleInput(otp, "OtherLastName" , "1")}
                               numInputs={25}
                             />
-                            <span className="ErrorMsg">{this.state.errors.OtherLastName}</span>
+                           
 
                             <OtpInput
                               name="OtherFirstName"
@@ -2702,7 +2714,7 @@ async validateYear() {
                               onChange={otp => this.handleInput(otp, "OtherFirstName" , "1")}
                               numInputs={25}
                             />
-                             <span className="ErrorMsg">{this.state.errors.OtherFirstName}</span>
+ 
 
                             <OtpInput
                               name="OtherMiddleName"
@@ -2710,14 +2722,13 @@ async validateYear() {
                               onChange={otp => this.handleInput(otp, "OtherMiddleName" , "1")}
                               numInputs={25}
                             />
-                            <span className="ErrorMsg">{this.state.errors.OtherMiddleName}</span>
 
                          </td>
                       </tr>
                    </tbody>
                    </table>
                    </div>
-                    
+                   <span className="ErrorMsg">{this.state.errors.OtherMiddleName}</span>
    
 
                   {/* Fourth Component */}
@@ -2751,6 +2762,7 @@ async validateYear() {
 
                          <label className="Label_with_no_space Move_End1"> (please tick as applicable)</label> 
                    </div>
+                   <span className="ErrorMsg">{this.state.errors.Gender}</span>
 
                    {/* Fifth Component */}
 
@@ -2805,8 +2817,7 @@ async validateYear() {
                        </tbody>
                        </table>
                        <span className="ErrorMsg">{this.state.errors.Day} </span> 
-                       <span className="ErrorMsg">{this.state.errors.Month}</span> 
-                       <span className="ErrorMsg">{this.state.errors.Year}</span> 
+                        
             
                     </div>
 
@@ -2835,7 +2846,7 @@ async validateYear() {
                               onChange={otp => this.handleInput(otp, "FatherLastName" , "1")}
                               numInputs={25}
                             />
-                           <span className="ErrorMsg">{this.state.errors.FatherLastName}</span>
+                           
 
                             <OtpInput
                               name="FatherFirstName"
@@ -2843,7 +2854,7 @@ async validateYear() {
                               onChange={otp => this.handleInput(otp, "FatherFirstName" , "1")}
                               numInputs={25}
                             />
-                            <span className="ErrorMsg">{this.state.errors.FatherFirstName}</span>
+                           
 
                             <OtpInput
                               name="FatherMiddleName"
@@ -2876,7 +2887,7 @@ async validateYear() {
                              onChange={otp => this.handleInput(otp, "MotherLastName" , "1")}
                              numInputs={25}
                             />
-                            <span className="ErrorMsg">{this.state.errors.MotherLastName}</span> 
+                             
 
                             <OtpInput
                               name="MotherFirstName"
@@ -2884,7 +2895,7 @@ async validateYear() {
                               onChange={otp => this.handleInput(otp, "MotherFirstName" , "1")}
                               numInputs={25}
                             />
-                            <span className="ErrorMsg">{this.state.errors.MotherFirstName}</span>
+                            
 
                             <OtpInput
                               name="MotherMiddleName"
@@ -2914,7 +2925,7 @@ async validateYear() {
                     <input 
                       type="checkbox" 
                       className="Check Left_space"
-                      id = "Father's name"
+                      id = "Mother's name"
                       name = "ParentName[5][]"
                       onClick={(e)=>this.handleCheckbox(e,"ParentName")}/>
                     <label className="Label_with_no_space">Mother’s name</label> 
@@ -2945,7 +2956,7 @@ async validateYear() {
                                onChange={otp => this.handleInput(otp, "ResidenceFlat" , "1")}
                                numInputs={25}
                             />
-                            <span className="ErrorMsg">{this.state.errors.ResidenceFlat}</span> 
+                             
 
                             <OtpInput
                                name="ResidencePremises"
@@ -2953,7 +2964,7 @@ async validateYear() {
                                onChange={otp => this.handleInput(otp, "ResidencePremises" , "1")}
                                numInputs={25}
                             />
-                            <span className="ErrorMsg">{this.state.errors.ResidencePremises}</span> 
+                            
 
                             <OtpInput
                               name="ResidenceRoad"
@@ -2961,7 +2972,7 @@ async validateYear() {
                               onChange={otp => this.handleInput(otp, "ResidenceRoad" , "1")}
                               numInputs={25}
                             />
-                            <span className="ErrorMsg">{this.state.errors.ResidenceRoad}</span> 
+                            
 
                             <OtpInput
                                name="ResidenceArea"
@@ -2969,7 +2980,7 @@ async validateYear() {
                                onChange={otp => this.handleInput(otp, "ResidenceArea" , "1")}
                                numInputs={25}
                             />
-                            <span className="ErrorMsg">{this.state.errors.ResidenceArea}</span> 
+                           
 
                             <OtpInput
                               name="ResidenceTown"
@@ -2977,7 +2988,7 @@ async validateYear() {
                               onChange={otp => this.handleInput(otp, "ResidenceTown" , "1")}
                               numInputs={25}
                             />
-                            <span className="ErrorMsg">{this.state.errors.ResidenceTown}</span> 
+                            
 
                          </td>
                       </tr>
@@ -3029,11 +3040,11 @@ async validateYear() {
                            </td>
                             
                        </tr>
-                       <span className="ErrorMsg">{this.state.errors.ResidenceState}</span>
-                       <span className="ErrorMsg">{this.state.errors.ResidencePincode}</span>
-                       <span className="ErrorMsg">{this.state.errors.ResidenceCountry}</span>
+                       
+                       
                     </tbody>
                     </table>
+                    <span className="ErrorMsg">{this.state.errors.ResidenceState}</span>
 
                     </div>
                     <br /><br />
@@ -3066,23 +3077,21 @@ async validateYear() {
                                onChange={otp => this.handleInput(otp, "OfficeName" , "1")}
                                numInputs={25}
                             />
-                            <span className="ErrorMsg">{this.state.errors.OfficeName}</span>
-
+                            
                             <OtpInput
                               name="OfficeFlat"
                               value={this.state.data.OfficeFlat}
                               onChange={otp => this.handleInput(otp, "OfficeFlat" , "1")}
                               numInputs={25}
                             />
-                            <span className="ErrorMsg">{this.state.errors.OfficeFlat}</span>
-
+                             
                             <OtpInput
                               name="OfficePremises"
                               value={this.state.data.OfficePremises}
                               onChange={otp => this.handleInput(otp, "OfficePremises" , "1")}
                               numInputs={25}
                             />
-                            <span className="ErrorMsg">{this.state.errors.OfficePremises}</span>
+                            
 
                             <OtpInput
                               name="OfficeRoad"
@@ -3090,23 +3099,21 @@ async validateYear() {
                               onChange={otp => this.handleInput(otp, "OfficeRoad" , "1")}
                               numInputs={25}
                             />
-                            <span className="ErrorMsg">{this.state.errors.OfficeRoad}</span>
-
+                             
                             <OtpInput
                               name="OfficeArea"
                               value={this.state.data.OfficeArea}
                               onChange={otp => this.handleInput(otp, "OfficeArea" , "1")}
                               numInputs={25}
                             />
-                            <span className="ErrorMsg">{this.state.errors.OfficeArea}</span>
-
+                             
                             <OtpInput
                               name="OfficeTown"
                               value={this.state.data.OfficeTown}
                               onChange={otp => this.handleInput(otp, "OfficeTown" , "1")}
                               numInputs={25}
                             />
-                            <span className="ErrorMsg">{this.state.errors.OfficeTown}</span>
+                             
 
                          </td>
                       </tr>
@@ -3155,11 +3162,10 @@ async validateYear() {
                                
                            </td>
                        </tr>
-                       <span className="ErrorMsg">{this.state.errors.OfficeState}</span>
-                       <span className="ErrorMsg">{this.state.errors.OfficePincode}</span>
-                       <span className="ErrorMsg">{this.state.errors.OfficeCountry}</span>
+                        
                     </tbody>
                     </table>
+                    <span className="ErrorMsg">{this.state.errors.OfficeState}</span>
 
                     {/* Eight Component */}
 
@@ -3185,6 +3191,7 @@ async validateYear() {
 
                         <label className="Label_with_no_space Move_End1"> (please tick as applicable)</label> 
                     </div>
+                    <span className="ErrorMsg">{this.state.errors.Communication}</span>
                      
                      {/* Ninth Component */}
 
@@ -3251,9 +3258,7 @@ async validateYear() {
                         value={this.state.data.Email}
                         onChange={event => this.handleEmail(event)}/>
 
-                     <span className="ErrorMsg">{this.state.errors.CountryCode}</span>
-                     <span className="ErrorMsg">{this.state.errors.StdCode}</span>
-                     <span className="ErrorMsg">{this.state.errors.PhoneNumber}</span>
+                      
                      <span className="ErrorMsg">{this.state.errors.Email}</span>
                     
                     {/* Tenth Component */}
@@ -3261,11 +3266,12 @@ async validateYear() {
                     <div className = "ColouredLabel">
                        <label >&nbsp;&nbsp; 10 &nbsp; Status of applicant</label> <br/>
                     </div>
+                    
 
                     <label className="FirstLabel"> &nbsp;&nbsp;Please select status,</label>  
                     <img src = {tick} alt= "tick" className = "image"></img>
                     <label className="Label_with_no_space"> as applicable</label>&nbsp; 
-
+                    
                     <input 
                        type="checkbox" 
                        className="Check GovernmentCheck"
@@ -3354,6 +3360,8 @@ async validateYear() {
                        name = "Status[7][]"
                        onClick={(e)=>this.handleCheckbox(e,"Status")}/> 
                     <label className = "Label_with_no_space"> Individual</label> <br/>
+                    <span className="ErrorMsg">{this.state.errors.Status}</span>
+
 
                     {/* Eleventh Component */}
 
@@ -3393,8 +3401,7 @@ async validateYear() {
                                      onChange={otp => this.handleInput(otp, "AadhaarNumber" , "1")}
                                      numInputs={12}
                                   />
-                                  <span className="ErrorMsg">{this.state.errors.AadhaarNumber}</span>
-
+                                  
                               </td>
                             </tr>
                        </tbody>
@@ -3411,7 +3418,7 @@ async validateYear() {
                          onChange={otp => this.handleInput(otp, "EnrolmentId" , "1")}
                          numInputs={28}
                        />  
-                       <span className="ErrorMsg">{this.state.errors.EnrolmentId}</span>
+                        
 
                     </div>
 
@@ -3425,16 +3432,14 @@ async validateYear() {
                            onChange={otp => this.handleInput(otp, "AadhaarLastName" , "1")}
                            numInputs={25}
                         />  
-                        <span className="ErrorMsg">{this.state.errors.AadhaarLastName}</span>
-
+                        
                          <OtpInput
                            name="AadhaarFirstName"
                            value={this.state.data.AadhaarFirstName}
                            onChange={otp => this.handleInput(otp, "AadhaarFirstName" , "1")}
                            numInputs={25}
                         />  
-                        <span className="ErrorMsg">{this.state.errors.AadhaarFirstName}</span>
-
+ 
                         <OtpInput
                            name="AadhaarMiddleName"
                            value={this.state.data.AadhaarMiddleName}
@@ -3597,7 +3602,7 @@ async validateYear() {
                               onChange={otp => this.handleInput(otp, "RALastName" , "1")}
                               numInputs={25}
                             />
-                            <span className="ErrorMsg">{this.state.errors.RALastName}</span>
+                             
 
                             <OtpInput
                               name="RAFirstName"
@@ -3605,7 +3610,7 @@ async validateYear() {
                               onChange={otp => this.handleInput(otp, "RAFirstName" , "1")}
                               numInputs={25}
                             />
-                            <span className="ErrorMsg">{this.state.errors.RAFirstName}</span>
+                           
 
                             <OtpInput
                               name="RAMiddleName"
@@ -3641,7 +3646,7 @@ async validateYear() {
                               onChange={otp => this.handleInput(otp, "RAFlat" , "1")}
                               numInputs={25}
                             />
-                            <span className="ErrorMsg">{this.state.errors.RAFlat}</span>
+                            
 
                             <OtpInput
                               name="RAPremises"
@@ -3649,7 +3654,7 @@ async validateYear() {
                               onChange={otp => this.handleInput(otp, "RAPremises" , "1")}
                               numInputs={25}
                             />
-                             <span className="ErrorMsg">{this.state.errors.RAPremises}</span>
+                              
                             
                             <OtpInput
                               name="RARoad"
@@ -3657,7 +3662,7 @@ async validateYear() {
                               onChange={otp => this.handleInput(otp, "RARoad" , "1")}
                               numInputs={25}
                             />
-                             <span className="ErrorMsg">{this.state.errors.RARoad}</span>
+                              
 
                             <OtpInput
                               name="RAArea"
@@ -3665,7 +3670,7 @@ async validateYear() {
                               onChange={otp => this.handleInput(otp, "RAArea" , "1")}
                               numInputs={25}
                             />
-                             <span className="ErrorMsg">{this.state.errors.RAArea}</span>
+ 
 
                             <OtpInput
                               name="RATown"
@@ -3673,7 +3678,7 @@ async validateYear() {
                               onChange={otp => this.handleInput(otp, "RATown" , "1")}
                               numInputs={25}
                             />
-                             <span className="ErrorMsg">{this.state.errors.RATown}</span>
+ 
 
 
                          </td>
@@ -3711,11 +3716,11 @@ async validateYear() {
                             
                            </td>
                        </tr>
-                       <span className="ErrorMsg">{this.state.errors.RAState}</span>
-                       <span className="ErrorMsg">{this.state.errors.RAPincode}</span>
-
+                        
+                       
                     </tbody>
                     </table>
+                    <span className="ErrorMsg">{this.state.errors.RAState}</span>
                  
                  {/* Fifteenth Component */}
                    
@@ -3739,8 +3744,7 @@ async validateYear() {
                        name="POA"
                        value={this.state.data.POA}
                        onChange={event => this.handlePOA(event)}/> 
-                    <span className="ErrorMsg">{this.state.errors.POA}</span>
-                    <span className="ErrorMsg">{this.state.errors.POI}</span><br/>
+                       <br/>
                     
                     <label className= "FirstLabel"> as proof of address and</label>&nbsp; 
                      
@@ -3780,7 +3784,7 @@ async validateYear() {
                         onChange={event => this.handleCapacity(event)}/> <br/>
 
                     <label className= "FirstLabel">do hereby declare that what is stated above is true to the best of my/our information and belief.</label>  
-                    <span className="ErrorMsg">{this.state.errors.Applicant}</span>
+                   
                     <span className="ErrorMsg">{this.state.errors.Capacity}</span>
 
                 </div>

@@ -2078,40 +2078,33 @@ async validateYear() {
 
  handleEmail = (event) => {
 
-   let Email = this.state.data;
-   let {name,value} =event.target;
-   this.setState(Email);
-   Email[name] = value;  
-   let val = this.state.isModalEnabled;
-   val = true;
-   this.setState({val});
+  let Email = this.state.data;
+  let {name,value} =event.target;
+  this.setState(Email);
+  Email[name] = value;
+  this.state.isModalEnabled =  true;
 
-   let temp = this.state.errors.Email;
-   this.temp = " ";
-   this.setState ({temp})
-   let textPattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-z\-0-9]+\.)+[a-z]{2,}))$/
-  
+  this.state.errors.Email = " ";
+  let temp = this.state.errors.Email;
+  this.setState ({temp})
+  let textPattern = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-z\-0-9]+\.)+[a-z]{2,}))$/
 
-   if(this.state.data.Email === " ")
-   { 
-       this.state.errors.Email= "*Please enter your Email";
-       let val = this.state.isModalEnabled;
-       val = false;
-       this.setState({val});
-   }
-   else if (typeof  this.state.data.Email !== "undefined") {
-       if (!textPattern.test(this.state.data.Email)) {
 
-           this.state.errors.Email = "*Please enter valid Eamil-id";
-           let val = this.state.isModalEnabled;
-           val = false;
-           this.setState({val});
-       }
-   }
-   
-    
-   let error = this.state.errors.Email;
-   this.setState({error});
+  if(this.state.data.Email === " ")
+  {
+      this.state.errors.Email = "*Please enter your Email";
+      this.state.isModalEnabled =  false;
+  }
+  else if (typeof  this.state.data.Email !== "undefined") {
+      if (!textPattern.test(this.state.data.Email)) {
+          this.state.errors.Email = "*Please enter valid Email-id";
+          this.state.isModalEnabled =  false;
+      }
+  }
+
+
+  let error = this.state.errors.Email;
+  this.setState({error});
  }
 
  handleBusinessCode1 = (event) => {

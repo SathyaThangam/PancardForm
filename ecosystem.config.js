@@ -24,7 +24,7 @@ module.exports = {
       ref  : 'origin/master',
       repo : 'https://github.com/SathyaThangam/pancard.git',
       path : '/var/www/pancard',
-      'post-deploy' : 'npm install --production && npm run build && pm2 del pancard || npm run production'
+      'post-deploy' : 'npm install --production && npm run build'
     }
   }
 };
